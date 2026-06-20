@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gothic+A1:wght@400;500;700;800;900&family=Jua&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#15101F;overflow:hidden;font-family:'Gothic A1',sans-serif}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes pop{0%{opacity:0;transform:scale(.55)}62%{transform:scale(1.07)}100%{opacity:1;transform:scale(1)}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@keyframes sparkle{0%,100%{opacity:.15;transform:scale(.7) rotate(0deg)}50%{opacity:.9;transform:scale(1.15) rotate(45deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+</style>
+</helmet>
+
+<div style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(120% 120% at 50% 0%, #322657 0%, #221A3E 48%, #160F26 100%);">
+  <div id="stage" style="width:1920px;height:1080px;position:relative;flex:none;transform:scale({{scale}});transform-origin:center center;overflow:hidden;background:radial-gradient(130% 100% at 80% -10%, rgba(232,181,60,.10), rgba(0,0,0,0) 42%), radial-gradient(120% 110% at 10% 110%, rgba(224,104,155,.12), rgba(0,0,0,0) 45%), linear-gradient(165deg, #2C2150 0%, #201838 55%, #18112B 100%);">
+
+    <!-- ambient deco -->
+    <div style="position:absolute;inset:0;pointer-events:none;">
+      <svg width="320" height="320" viewBox="0 0 100 100" style="position:absolute;left:-60px;top:-50px;opacity:.10;">
+        <circle cx="50" cy="50" r="46" fill="none" stroke="#F6D873" stroke-width="1.4"/>
+        <circle cx="50" cy="50" r="34" fill="none" stroke="#F6D873" stroke-width="0.8"/>
+        <path d="M50 6 L57 50 L50 94 L43 50 Z" fill="#F6D873"/>
+        <path d="M6 50 L50 43 L94 50 L50 57 Z" fill="#E0689B"/>
+      </svg>
+      <div style="position:absolute;left:160px;top:170px;width:26px;height:26px;background:#F6D873;clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);animation:sparkle 4s ease-in-out infinite;"></div>
+      <div style="position:absolute;right:240px;top:120px;width:34px;height:34px;background:#E0689B;clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);animation:sparkle 5s ease-in-out .8s infinite;"></div>
+      <div style="position:absolute;right:120px;bottom:220px;width:22px;height:22px;background:#6FC9B0;clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);animation:sparkle 4.4s ease-in-out 1.6s infinite;"></div>
+      <div style="position:absolute;left:90px;bottom:150px;width:20px;height:20px;background:#F6D873;clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);animation:sparkle 5.2s ease-in-out 2.2s infinite;"></div>
+    </div>
+
+    <!-- ===================== TITLE ===================== -->
+    <sc-if value="{{isTitle}}" hint-placeholder-val="{{true}}">
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+      <div style="animation:floaty 4.5s ease-in-out infinite;margin-bottom:6px;">
+        <svg width="190" height="132" viewBox="0 0 120 86"><defs><linearGradient id="cg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F8DE86"/><stop offset="1" stop-color="#E3B23A"/></linearGradient></defs><path d="M8 74 L16 28 L40 52 L60 14 L80 52 L104 28 L112 74 Z" fill="url(#cg1)" stroke="#B9852A" stroke-width="3" stroke-linejoin="round"/><rect x="8" y="70" width="104" height="16" rx="6" fill="#E3B23A" stroke="#B9852A" stroke-width="3"/><circle cx="16" cy="24" r="6" fill="#F8DE86" stroke="#B9852A" stroke-width="2"/><circle cx="60" cy="10" r="7.5" fill="#F8DE86" stroke="#B9852A" stroke-width="2"/><circle cx="104" cy="24" r="6" fill="#F8DE86" stroke="#B9852A" stroke-width="2"/><circle cx="60" cy="62" r="7" fill="#E0689B"/><circle cx="36" cy="64" r="5" fill="#2FA0A8"/><circle cx="84" cy="64" r="5" fill="#2FA0A8"/></svg>
+      </div>
+      <div style="transform:rotate(-5deg);background:linear-gradient(180deg,#E86FA6,#C94E84);color:#fff;font-family:'Jua',sans-serif;font-size:28px;padding:9px 26px;border-radius:999px;box-shadow:0 10px 24px rgba(0,0,0,.35);letter-spacing:6px;margin-bottom:20px;white-space:nowrap;">BIBLE QUIZ</div>
+      <div style="background:linear-gradient(180deg,#352B5A,#251D44);border:4px solid rgba(246,216,115,.5);border-radius:32px;padding:24px 70px;box-shadow:0 28px 64px rgba(0,0,0,.5);">
+        <div style="font-family:'Black Han Sans',sans-serif;font-size:150px;color:#F7EFDC;letter-spacing:16px;line-height:1;text-shadow:0 4px 0 rgba(0,0,0,.25);white-space:nowrap;">왕들의 지혜</div>
+      </div>
+      <div style="margin-top:24px;background:linear-gradient(180deg,#E86FA6,#C94E84);border-radius:26px;padding:12px 64px;box-shadow:0 22px 46px rgba(201,78,132,.5);">
+        <div style="font-family:'Black Han Sans',sans-serif;font-size:108px;color:#fff;letter-spacing:34px;line-height:1;padding-left:34px;text-shadow:0 4px 0 rgba(0,0,0,.18);white-space:nowrap;">보물전</div>
+      </div>
+      <div style="margin-top:42px;display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <div style="font-family:'Gothic A1',sans-serif;font-weight:800;font-size:36px;color:#F6D873;">2026 아동부 성경퀴즈 대회</div>
+        <div style="font-family:'Jua',sans-serif;font-size:20px;color:#B3A7DA;letter-spacing:6px;white-space:nowrap;">BIBLE QUIZ · CAPSULE TRAVEL</div>
+      </div>
+      <button onClick="{{next}}" style="margin-top:46px;cursor:pointer;border:none;font-family:'Black Han Sans',sans-serif;font-size:40px;color:#5A3A12;background:linear-gradient(180deg,#F6D873,#E5B53C);padding:20px 58px;border-radius:999px;box-shadow:0 16px 34px rgba(229,181,60,.5), inset 0 2px 0 rgba(255,255,255,.6);" style-hover="transform:translateY(-3px);box-shadow:0 22px 40px rgba(229,181,60,.6), inset 0 2px 0 rgba(255,255,255,.6)">퀴즈 시작하기 →</button>
+    </div>
+    </sc-if>
+
+    <!-- ===================== RULES ===================== -->
+    <sc-if value="{{isRules}}" hint-placeholder-val="{{false}}">
+    <div style="position:absolute;inset:0;padding:60px 84px 56px;display:flex;flex-direction:column;">
+      <div style="text-align:center;margin-bottom:18px;">
+        <div style="font-family:'Black Han Sans',sans-serif;font-size:74px;color:#F7EFDC;line-height:1;">게임 규칙 안내</div>
+        <div style="font-family:'Jua',sans-serif;font-size:22px;color:#B3A7DA;letter-spacing:6px;margin-top:6px;">HOW TO PLAY</div>
+      </div>
+      <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:26px;">
+        <div style="background:linear-gradient(180deg,#FBF4E2,#F2E4C2);border:3px solid #E7CE97;border-radius:26px;padding:34px 40px;box-shadow:0 18px 44px rgba(0,0,0,.4);display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;"><div style="width:54px;height:54px;border-radius:16px;background:#2FA0A8;display:flex;align-items:center;justify-content:center;font-size:30px;">📖</div><div style="font-family:'Black Han Sans',sans-serif;font-size:38px;color:#2B2147;">퀴즈 진행</div></div>
+          <div style="font-family:'Gothic A1',sans-serif;font-weight:700;font-size:29px;color:#4A3B66;line-height:1.55;">문제 출제 → 팀별 10초 상의 → 화이트보드에 정답 적기 → 다 함께 동시 공개 → 정답 팀 점수 획득!</div>
+        </div>
+        <div style="background:linear-gradient(180deg,#FBF4E2,#F2E4C2);border:3px solid #E7CE97;border-radius:26px;padding:34px 40px;box-shadow:0 18px 44px rgba(0,0,0,.4);display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;"><div style="width:54px;height:54px;border-radius:16px;background:#E8B53A;display:flex;align-items:center;justify-content:center;font-size:30px;">💯</div><div style="font-family:'Black Han Sans',sans-serif;font-size:38px;color:#2B2147;">배점</div></div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-family:'Gothic A1',sans-serif;font-weight:800;font-size:28px;color:#4A3B66;">OX 퀴즈 <span style="color:#9C8AB8;font-weight:700;">(1~5번)</span></span><span style="font-family:'Black Han Sans',sans-serif;font-size:30px;color:#E0689B;background:#fff;border:2px solid #E0689B;border-radius:999px;padding:2px 18px;">10점</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-family:'Gothic A1',sans-serif;font-weight:800;font-size:28px;color:#4A3B66;">객관식 <span style="color:#9C8AB8;font-weight:700;">(6~15번)</span></span><span style="font-family:'Black Han Sans',sans-serif;font-size:30px;color:#2FA0A8;background:#fff;border:2px solid #2FA0A8;border-radius:999px;padding:2px 18px;">20점</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-family:'Gothic A1',sans-serif;font-weight:800;font-size:28px;color:#4A3B66;">주관식 <span style="color:#9C8AB8;font-weight:700;">(16~30번)</span></span><span style="font-family:'Black Han Sans',sans-serif;font-size:30px;color:#D79A22;background:#fff;border:2px solid #E8B53A;border-radius:999px;padding:2px 18px;">30점</span></div>
+          </div>
+        </div>
+        <div style="background:linear-gradient(180deg,#FBF4E2,#F2E4C2);border:3px solid #E7CE97;border-radius:26px;padding:34px 40px;box-shadow:0 18px 44px rgba(0,0,0,.4);display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;"><div style="width:54px;height:54px;border-radius:16px;background:#E0689B;display:flex;align-items:center;justify-content:center;font-size:30px;">🎁</div><div style="font-family:'Black Han Sans',sans-serif;font-size:38px;color:#2B2147;">캡슐 이벤트</div></div>
+          <div style="font-family:'Gothic A1',sans-serif;font-weight:700;font-size:28px;color:#4A3B66;line-height:1.5;"><b style="color:#C94E84;">5 · 10 · 15 · 20 · 25번</b> 문제 후 캡슐 뽑기! 좋은 캡슐 · 아쉬운 캡슐 · 특별 캡슐 → 점수 변동 또는 찬스 발생!</div>
+        </div>
+        <div style="background:linear-gradient(180deg,#352B5A,#271E48);border:3px solid rgba(246,216,115,.55);border-radius:26px;padding:34px 40px;box-shadow:0 18px 44px rgba(0,0,0,.45);display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;"><div style="width:54px;height:54px;border-radius:16px;background:#F6D873;display:flex;align-items:center;justify-content:center;font-size:30px;">✨</div><div style="font-family:'Black Han Sans',sans-serif;font-size:38px;color:#F7EFDC;">마지막 미션</div></div>
+          <div style="font-family:'Gothic A1',sans-serif;font-weight:700;font-size:30px;color:#E7DCFA;line-height:1.55;">성경구절 <b style="color:#F6D873;">이어 말하기</b> — 완벽하게 끝낸 팀에게 <b style="color:#F6D873;">+50점!</b></div>
+        </div>
+      </div>
+      <div style="margin-top:20px;text-align:center;font-family:'Gothic A1',sans-serif;font-weight:800;font-size:27px;color:#F6D873;">정답판은 팀당 1개, 제한시간 10초 — 다 함께 즐겁게 참여해요!</div>
+    </div>
+    </sc-if>
+
+    <!-- ===================== QUESTION ===================== -->
+    <sc-if value="{{isQ}}" hint-placeholder-val="{{false}}">
+    <div style="position:absolute;inset:0;padding:60px 84px 44px;display:flex;flex-direction:column;">
+      <!-- header -->
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:30px;">
+        <div style="display:flex;align-items:center;gap:22px;">
+          <div style="width:118px;height:118px;border-radius:28px;background:linear-gradient(180deg,#3A2F61,#251C45);border:3px solid {{accent}};display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 14px 30px rgba(0,0,0,.4);">
+            <div style="font-family:'Jua',sans-serif;font-size:17px;color:#B3A7DA;letter-spacing:2px;">문제</div>
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:62px;color:#F7EFDC;line-height:.85;">{{qNum}}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start;">
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:30px;color:#241B42;background:{{accent}};padding:9px 26px;border-radius:999px;box-shadow:0 8px 18px rgba(0,0,0,.3);">{{qTypeLabel}} · {{qPoints}}점</div>
+            <sc-if value="{{hasRef}}" hint-placeholder-val="{{false}}"><div style="font-family:'Gothic A1',sans-serif;font-weight:800;font-size:23px;color:#D9CCF5;background:rgba(255,255,255,.08);padding:6px 18px;border-radius:999px;">📖 {{bibleRef}}</div></sc-if>
+          </div>
+        </div>
+        <!-- timer -->
+        <div onClick="{{start}}" style="cursor:pointer;position:relative;width:200px;height:200px;flex:none;">
+          <svg width="200" height="200" viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="86" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)" stroke-width="15"/>
+            <circle cx="100" cy="100" r="86" fill="none" stroke="{{ringColor}}" stroke-width="15" stroke-linecap="round" stroke-dasharray="{{ringCirc}}" stroke-dashoffset="{{ringOffset}}" transform="rotate(-90 100 100)" style="transition:stroke-dashoffset .12s linear, stroke .3s"></circle>
+          </svg>
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:82px;color:{{ringColor}};line-height:.85;">{{timerDisplay}}</div>
+            <div style="font-family:'Gothic A1',sans-serif;font-weight:800;font-size:17px;color:#B3A7DA;margin-top:4px;">{{timerLabel}}</div>
+          </div>
+        </div>
+      </div>
+      <!-- progress -->
+      <div style="margin-top:18px;display:flex;align-items:center;gap:16px;">
+        <div style="font-family:'Gothic A1',sans-serif;font-weight:800;font-size:20px;color:#B3A7DA;white-space:nowrap;">{{qProgressLabel}}</div>
+        <div style="flex:1;height:12px;border-radius:999px;background:rgba(255,255,255,.09);overflow:hidden;">
+          <div style="height:100%;width:{{qFillPct}};background:linear-gradient(90deg,#E0689B,#F6D873);border-radius:999px;transition:width .5s;"></div>
+        </div>
+      </div>
+      <!-- card -->
+      <div style="flex:1;margin-top:26px;display:flex;align-items:stretch;justify-content:center;min-height:0;">
+        <div style="width:100%;background:linear-gradient(180deg,#FBF4E2,#F1E2BD);border:3px solid #E7CE97;border-radius:30px;box-shadow:0 24px 60px rgba(0,0,0,.45), inset 0 2px 0 rgba(255,255,255,.6);padding:44px 60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;">
+          <div style="text-align:center;">
+            <sc-for list="{{promptLines}}" as="line" hint-placeholder-count="2">
+              <div style="font-family:'Gothic A1',sans-serif;font-weight:800;font-size:{{promptSize}};color:#322550;line-height:1.34;text-wrap:balance;">{{line}}</div>
+            </sc-for>
+          </div>
+          <sc-if value="{{isOX}}" hint-placeholder-val="{{false}}">
+            <div style="display:flex;gap:54px;align-items:center;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="width:128px;height:128px;border-radius:26px;border:9px solid #2E9E6B;background:#fff;display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:82px;color:#2E9E6B;box-shadow:0 10px 24px rgba(46,158,107,.25);">O</div><div style="font-family:'Jua',sans-serif;font-size:24px;color:#4A3B66;">맞으면</div></div>
+              <div style="font-family:'Black Han Sans',sans-serif;font-size:46px;color:#C2B0DA;">VS</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="width:128px;height:128px;border-radius:26px;border:9px solid #D85547;background:#fff;display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:82px;color:#D85547;box-shadow:0 10px 24px rgba(216,85,71,.25);">X</div><div style="font-family:'Jua',sans-serif;font-size:24px;color:#4A3B66;">틀리면</div></div>
+            </div>
+          </sc-if>
+          <sc-if value="{{isMC}}" hint-placeholder-val="{{false}}">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;width:100%;">
+              <sc-for list="{{options}}" as="opt" hint-placeholder-count="4">
+                <div style="display:flex;align-items:center;gap:20px;background:#fff;border:3px solid #EAD6A6;border-radius:20px;padding:18px 28px;box-shadow:0 6px 0 rgba(231,206,151,.6);">
+                  <div style="width:56px;height:56px;flex:none;border-radius:50%;background:{{accent}};color:#fff;font-family:'Black Han Sans',sans-serif;font-size:34px;display:flex;align-items:center;justify-content:center;">{{opt.letter}}</div>
+                  <div style="font-family:'Gothic A1',sans-serif;font-weight:800;font-size:40px;color:#322550;">{{opt.text}}</div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+      <div style="margin-top:16px;text-align:center;font-family:'Gothic A1',sans-serif;font-weight:800;font-size:26px;color:#C9BEE8;">{{instruction}}</div>
+    </div>
+    </sc-if>
+
+    <!-- ===================== ANSWER ===================== -->
+    <sc-if value="{{isA}}" hint-placeholder-val="{{false}}">
+    <div style="position:absolute;inset:0;padding:60px 84px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+      <div style="font-family:'Jua',sans-serif;font-size:28px;color:#241B42;background:#F6D873;padding:8px 30px;border-radius:999px;box-shadow:0 8px 18px rgba(246,216,115,.4);">{{aQNum}}번 문제 정답</div>
+      <div style="font-family:'Black Han Sans',sans-serif;font-size:88px;color:#F6D873;margin-top:16px;animation:pop .5s both;text-shadow:0 4px 0 rgba(0,0,0,.25);">정답은!</div>
+
+      <sc-if value="{{aIsOX}}" hint-placeholder-val="{{false}}">
+        <div style="margin-top:22px;display:flex;align-items:center;gap:60px;animation:pop .55s .08s both;">
+          <sc-if value="{{oxIsO}}" hint-placeholder-val="{{false}}"><img src="assets/mascot-o-purple.png" style="height:340px;filter:drop-shadow(0 18px 30px rgba(0,0,0,.4));"/></sc-if>
+          <sc-if value="{{oxIsX}}" hint-placeholder-val="{{false}}"><img src="assets/mascot-x-pink.png" style="height:340px;filter:drop-shadow(0 18px 30px rgba(0,0,0,.4));"/></sc-if>
+          <div style="width:248px;height:248px;border-radius:44px;border:15px solid {{oxColor}};background:#fff;display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:178px;color:{{oxColor}};box-shadow:0 24px 56px rgba(0,0,0,.45);">{{oxValue}}</div>
+        </div>
+        <sc-if value="{{hasExplain}}" hint-placeholder-val="{{false}}">
+          <div style="margin-top:30px;max-width:1180px;background:linear-gradient(180deg,#FBF4E2,#F1E2BD);border:3px solid #E7CE97;border-radius:24px;padding:26px 46px;box-shadow:0 16px 40px rgba(0,0,0,.4);font-family:'Gothic A1',sans-serif;font-weight:800;font-size:38px;color:#4A3B66;line-height:1.4;">{{explain}}</div>
+        </sc-if>
+      </sc-if>
+
+      <sc-if value="{{aIsText}}" hint-placeholder-val="{{false}}">
+        <div style="margin-top:34px;max-width:1560px;background:linear-gradient(180deg,#FBF4E2,#F1E2BD);border:4px solid #E7CE97;border-radius:32px;padding:52px 76px;box-shadow:0 26px 64px rgba(0,0,0,.45), inset 0 2px 0 rgba(255,255,255,.6);animation:pop .55s .08s both;">
+          <div style="font-family:'Black Han Sans',sans-serif;font-size:{{answerFontSize}};color:#322550;line-height:1.32;text-wrap:balance;">{{answerText}}</div>
+        </div>
+      </sc-if>
+    </div>
+    </sc-if>
+
+    <!-- ===================== CAPSULE ===================== -->
+    <sc-if value="{{isCapsule}}" hint-placeholder-val="{{false}}">
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+      <div style="font-family:'Black Han Sans',sans-serif;font-size:92px;color:#F6D873;animation:pop .5s both;text-shadow:0 4px 0 rgba(0,0,0,.25);">🎁 캡슐 뽑기 타임! 🎁</div>
+      <img src="assets/capsule-machine.png" style="height:400px;margin:18px 0 8px;animation:floaty 3.6s ease-in-out infinite;filter:drop-shadow(0 26px 44px rgba(0,0,0,.45));"/>
+      <div style="font-family:'Gothic A1',sans-serif;font-weight:800;font-size:48px;color:#F7EFDC;">{{capsuleAfter}}번 문제까지 풀었어요!</div>
+      <div style="font-family:'Gothic A1',sans-serif;font-weight:700;font-size:34px;color:#C9BEE8;margin-top:8px;">각 팀, 캡슐을 뽑아 주세요 🎉</div>
+      <div style="margin-top:26px;display:flex;gap:16px;">
+        <div style="font-family:'Black Han Sans',sans-serif;font-size:28px;color:#fff;background:#2E9E6B;padding:10px 28px;border-radius:999px;">좋은 캡슐</div>
+        <div style="font-family:'Black Han Sans',sans-serif;font-size:28px;color:#fff;background:#8C7FB8;padding:10px 28px;border-radius:999px;">아쉬운 캡슐</div>
+        <div style="font-family:'Black Han Sans',sans-serif;font-size:28px;color:#5A3A12;background:linear-gradient(180deg,#F6D873,#E5B53C);padding:10px 28px;border-radius:999px;">특별 캡슐</div>
+      </div>
+      <div style="margin-top:16px;font-family:'Jua',sans-serif;font-size:26px;color:#B3A7DA;">점수 변동 또는 찬스 발생!</div>
+    </div>
+    </sc-if>
+
+    <!-- ===================== FINAL ===================== -->
+    <sc-if value="{{isFinal}}" hint-placeholder-val="{{false}}">
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+      <div style="animation:floaty 4.5s ease-in-out infinite;margin-bottom:8px;">
+        <svg width="200" height="140" viewBox="0 0 120 86"><defs><linearGradient id="cg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F8DE86"/><stop offset="1" stop-color="#E3B23A"/></linearGradient></defs><path d="M8 74 L16 28 L40 52 L60 14 L80 52 L104 28 L112 74 Z" fill="url(#cg2)" stroke="#B9852A" stroke-width="3" stroke-linejoin="round"/><rect x="8" y="70" width="104" height="16" rx="6" fill="#E3B23A" stroke="#B9852A" stroke-width="3"/><circle cx="60" cy="62" r="7" fill="#E0689B"/><circle cx="36" cy="64" r="5" fill="#2FA0A8"/><circle cx="84" cy="64" r="5" fill="#2FA0A8"/></svg>
+      </div>
+      <div style="font-family:'Black Han Sans',sans-serif;font-size:122px;color:#F6D873;animation:pop .5s both;text-shadow:0 5px 0 rgba(0,0,0,.25);">보물전 클리어!</div>
+      <div style="font-family:'Gothic A1',sans-serif;font-weight:800;font-size:44px;color:#F7EFDC;margin-top:6px;">왕들의 지혜를 모두 찾았어요 👑</div>
+      <div style="margin-top:34px;background:linear-gradient(180deg,#FBF4E2,#F1E2BD);border:4px solid #E7CE97;border-radius:30px;padding:36px 60px;max-width:1300px;box-shadow:0 24px 60px rgba(0,0,0,.45);">
+        <div style="font-family:'Jua',sans-serif;font-size:30px;color:#C9542F;">✨ 마지막 미션</div>
+        <div style="font-family:'Gothic A1',sans-serif;font-weight:800;font-size:46px;color:#322550;margin-top:10px;line-height:1.35;">성경구절 이어 말하기 — 완벽하게 끝낸 팀에게 <span style="color:#C9542F;">+50점!</span></div>
+      </div>
+      <div style="margin-top:28px;font-family:'Gothic A1',sans-serif;font-weight:700;font-size:30px;color:#C9BEE8;">다 함께 즐겁게 참여해 주셔서 고마워요!</div>
+    </div>
+    </sc-if>
+
+    <!-- ===================== NAV ===================== -->
+    <div id="qnav" style="position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:50;">
+      <button onClick="{{prev}}" style="cursor:pointer;border:none;width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.1);color:#E7DCFA;font-size:30px;font-family:'Gothic A1',sans-serif;display:flex;align-items:center;justify-content:center;line-height:1;" style-hover="background:rgba(255,255,255,.2)">‹</button>
+      <div style="font-family:'Gothic A1',sans-serif;font-weight:800;color:#C9BEE8;font-size:19px;min-width:96px;text-align:center;background:rgba(0,0,0,.28);padding:10px 16px;border-radius:999px;">{{screenCounter}}</div>
+      <button onClick="{{next}}" style="cursor:pointer;border:none;width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.1);color:#E7DCFA;font-size:30px;font-family:'Gothic A1',sans-serif;display:flex;align-items:center;justify-content:center;line-height:1;" style-hover="background:rgba(255,255,255,.2)">›</button>
+      <button onClick="{{toTitle}}" style="cursor:pointer;border:none;height:54px;border-radius:999px;background:rgba(255,255,255,.1);color:#E7DCFA;font-size:18px;font-family:'Gothic A1',sans-serif;font-weight:800;padding:0 22px;" style-hover="background:rgba(255,255,255,.2)">처음으로</button>
+    </div>
+    <div id="qhint" style="position:absolute;left:30px;bottom:30px;font-family:'Gothic A1',sans-serif;font-weight:700;font-size:16px;color:rgba(199,190,232,.55);z-index:50;">← → 이동 · Space 타이머 시작</div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  QUESTIONS = [
+    {n:1,type:'ox',points:10,prompt:'이스라엘의 지파는\n총 12지파이다.',answer:'O'},
+    {n:2,type:'ox',points:10,prompt:'다윗은 끝까지 하나님을 떠나지 않고\n전심으로 하나님을 사랑했다.',answer:'O'},
+    {n:3,type:'ox',points:10,prompt:'솔로몬은 한 번도\n우상을 섬긴 적이 없다.',answer:'X',explain:'솔로몬은 이방 아내들의 영향으로 우상을 섬기게 되었어요.'},
+    {n:4,type:'ox',points:10,prompt:'북이스라엘과 남유다는\n솔로몬이 죽은 후 둘로 나뉘었다.',answer:'O'},
+    {n:5,type:'ox',points:10,prompt:'엘리야는 죽음을 경험하지 않고\n하늘로 올라갔다.',answer:'O'},
+    {n:6,type:'mc',points:20,prompt:'솔로몬의 아들로\n남유다의 첫 번째 왕은 누구인가요?',options:['여로보암','르호보암','아합','요시야'],answerIndex:1,answer:'② 르호보암'},
+    {n:7,type:'mc',points:20,prompt:'북이스라엘의 첫 번째 왕으로, 금송아지를 만들어\n백성들이 우상을 섬기게 한 왕은?',options:['여로보암','아합','아하스','므낫세'],answerIndex:0,answer:'① 여로보암'},
+    {n:8,type:'mc',points:20,prompt:'이방 여인 이세벨과 결혼하고, 바알 우상을\n이스라엘에 들여온 북이스라엘의 왕은?',options:['여로보암','아합','히스기야','요시야'],answerIndex:1,answer:'② 아합'},
+    {n:9,type:'mc',points:20,prompt:'엘리야와 바알 선지자들이\n대결한 산은 어디인가요?',options:['시내산','감람산','갈멜산','시온산'],answerIndex:2,answer:'③ 갈멜산'},
+    {n:10,type:'mc',points:20,prompt:'엘리야의 뒤를 이어 하나님의 일을\n하게 된 선지자는 누구인가요?',options:['이사야','엘리사','아모스','예레미야'],answerIndex:1,answer:'② 엘리사'},
+    {n:11,type:'mc',points:20,prompt:'아람의 군대장관으로, 엘리사의 말에 따라 요단강에서\n일곱 번 몸을 씻어 한센병이 나은 사람은?',options:['나아만 장군','골리앗','삭개오','니고데모'],answerIndex:0,answer:'① 나아만 장군'},
+    {n:12,type:'mc',points:20,prompt:'결국 북이스라엘은\n어느 나라에 의해 멸망하였나요?',options:['바벨론','애굽','앗수르','로마'],answerIndex:2,answer:'③ 앗수르'},
+    {n:13,type:'mc',points:20,prompt:'히스기야의 아버지로, 성전 문에 나무 못을 박아\n예배드리지 못하게 한 악한 왕은?',options:['아몬','아하스','므낫세','요시야'],answerIndex:1,answer:'② 아하스'},
+    {n:14,type:'mc',points:20,prompt:'남유다 왕 중, 가장 악한 왕으로 꼽히며\n55년간 다스린 왕은 누구인가요?',options:['르호보암','아하스','므낫세','요시야'],answerIndex:2,answer:'③ 므낫세'},
+    {n:15,type:'mc',points:20,prompt:'서기관 사반을 통해 성전을 수리하던 중 율법책을\n발견하고 개혁을 일으킨 남유다의 왕은?',options:['히스기야','요시야','아몬','시드기야'],answerIndex:1,answer:'② 요시야'},
+    {n:16,type:'short',points:30,prompt:'북이스라엘과 남유다로 분열되기 전,\n이스라엘을 다스렸던 세 왕의 이름을\n차례대로 쓰시오.',answer:'사울 - 다윗 - 솔로몬'},
+    {n:17,type:'short',points:30,prompt:'이스라엘은 총 12지파입니다. 이 중\n북이스라엘은 [ ]지파, 남유다는 [ ]지파로 나뉘었어요.',answer:'10지파, 2지파'},
+    {n:18,type:'short',points:30,prompt:'북이스라엘 아합 왕의 부인으로, 하나님의\n선지자 엘리야를 죽이겠다고 협박한 사람은?',answer:'이세벨'},
+    {n:19,type:'short',points:30,prompt:'엘리야가 기도하자 하늘에서 불이 내려왔어요.\n이를 본 이스라엘 백성들은 무엇이라고 외쳤을까요?',answer:'그가 주 하나님이시다'},
+    {n:20,type:'short',points:30,prompt:'엘리야는 자신의 뒤를 이을 사람으로\n엘리사를 부르며 무엇을 던져 주었나요?',answer:'겉옷'},
+    {n:21,type:'short',points:30,prompt:'남유다의 요시야 왕이 성전을 수리하던 중 발견한,\n하나님의 말씀이 담긴 책은 무엇인가요?',answer:'언약책 (율법책)'},
+    {n:22,type:'short',points:30,prompt:'남유다 백성들처럼 우리도 하나님보다 다른 것이\n소중해질 때, 우리는 어떻게 해야 할까요?',answer:'하나님의 말씀으로 돌아가야 해요'},
+    {n:23,type:'short',points:30,prompt:'히스기야의 아버지로, 하나님께 예배하는 성전 문에\n나무 못을 박아 예배드리지 못하게 한 왕은?',answer:'아하스'},
+    {n:24,type:'short',points:30,prompt:'히스기야는 성전을 수리하고, 우상과 산당도 제거하며\n하나님 보시기에 올바른 일을 한 왕이에요.\n이 왕은 몇 살에 왕이 되어 몇 년 동안 다스렸나요?',answer:'25살에 왕이 되어 29년 동안'},
+    {n:25,type:'short',points:30,prompt:'악한 자는 그 길을 버리고, 불의한 자는 그 생각을 버리고,\n[ ] 주님께서 그에게 긍휼을 베푸실 것이다.',ref:'이사야 55:6',answer:'주님께 돌아오너라'},
+    {n:26,type:'short',points:30,prompt:'남유다의 마지막 왕으로\n바벨론의 포로로 끌려간 왕은 누구인가요?',answer:'시드기야'},
+    {n:27,type:'short',points:30,prompt:'결국 돌이키지 않은 남유다 백성들은\n어느 나라에 의해서 멸망하나요?',answer:'바벨론'},
+    {n:28,type:'short',points:30,prompt:'내가 주께 범죄하지 않으려고, [ ]을\n내 마음 속에 깊이 간직합니다.',ref:'시편 119:11',answer:'주님의 말씀'},
+    {n:29,type:'short',points:30,prompt:'오로지 [ ]를 실천하며 인자를 [ ]하며,\n겸손히 네 하나님과 함께 행하는 것',ref:'미가서 6:8',answer:'공의, 사랑'},
+    {n:30,type:'short',points:30,prompt:'요한복음 3장 16절을 쓰시오.',ref:'요한복음 3:16',answer:'하나님께서 세상을 이처럼 사랑하셔서 외아들을 주셨으니, 이는 그를 믿는 사람마다 멸망하지 않고 영생을 얻게 하려는 것이다.'},
+  ];
+
+  buildScreens(){
+    const s=[{type:'title'},{type:'rules'}];
+    const cap=[5,10,15,20,25];
+    for(const q of this.QUESTIONS){
+      s.push({type:'q',q});
+      s.push({type:'a',q});
+      if(cap.indexOf(q.n)>=0) s.push({type:'capsule',after:q.n});
+    }
+    s.push({type:'final'});
+    return s;
+  }
+
+  screens = this.buildScreens();
+  state = { index:this.loadIdx(), scale:1, timeLeft:10, timerState:'idle' };
+
+  loadIdx(){
+    try{ const v=parseInt(localStorage.getItem('kw-quiz-idx')); if(!isNaN(v)&&v>=0) return Math.min(v, this.screens.length-1); }catch(e){}
+    return 0;
+  }
+
+  componentDidMount(){
+    this._onKey=(e)=>{
+      if(e.key==='ArrowRight'||e.key==='PageDown'){ e.preventDefault(); this.go(1); }
+      else if(e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); this.go(-1); }
+      else if(e.key===' '||e.key==='Spacebar'){ const c=this.screens[this.state.index]; if(c&&c.type==='q'){ e.preventDefault(); this.startTimer(); } }
+    };
+    this._onResize=()=>this.computeScale();
+    window.addEventListener('keydown',this._onKey);
+    window.addEventListener('resize',this._onResize);
+    this.computeScale();
+    window.__quizGoto=(i)=>this.goTo(i);
+    window.__quizCount=this.screens.length;
+  }
+  componentWillUnmount(){
+    window.removeEventListener('keydown',this._onKey);
+    window.removeEventListener('resize',this._onResize);
+    if(this._raf) cancelAnimationFrame(this._raf);
+  }
+  computeScale(){ this.setState({scale:Math.min(window.innerWidth/1920, window.innerHeight/1080)}); }
+
+  go(d){
+    if(this._raf) cancelAnimationFrame(this._raf);
+    const i=Math.min(this.screens.length-1, Math.max(0, this.state.index+d));
+    this.setState({index:i, timerState:'idle', timeLeft:10});
+    try{ localStorage.setItem('kw-quiz-idx', String(i)); }catch(e){}
+  }
+  goTo(i){
+    if(this._raf) cancelAnimationFrame(this._raf);
+    const n=Math.min(this.screens.length-1, Math.max(0, i));
+    this.setState({index:n, timerState:'idle', timeLeft:10});
+    try{ localStorage.setItem('kw-quiz-idx', String(n)); }catch(e){}
+  }
+
+  /* ---------- audio ---------- */
+  ensureAudio(){
+    if(!this._ac){ try{ this._ac=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ return; } }
+    if(this._ac && this._ac.state==='suspended') this._ac.resume();
+  }
+  tickSound(){
+    const a=this._ac; if(!a) return; const t=a.currentTime;
+    const o=a.createOscillator(), g=a.createGain();
+    o.type='square'; o.frequency.value=760;
+    g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.22,t+0.01); g.gain.exponentialRampToValueAtTime(0.0001,t+0.13);
+    o.connect(g).connect(a.destination); o.start(t); o.stop(t+0.15);
+  }
+  endSound(){
+    this.ensureAudio(); const a=this._ac; if(!a) return; const t=a.currentTime;
+    [0,0.19,0.38].forEach((dt)=>{
+      const o=a.createOscillator(), g=a.createGain();
+      o.type='sawtooth'; o.frequency.value=430;
+      const st=t+dt;
+      g.gain.setValueAtTime(0.0001,st); g.gain.exponentialRampToValueAtTime(0.32,st+0.02); g.gain.exponentialRampToValueAtTime(0.0001,st+0.16);
+      o.connect(g).connect(a.destination); o.start(st); o.stop(st+0.18);
+    });
+    const bell=t+0.62;
+    [523.25,659.25,783.99].forEach((f)=>{
+      const o=a.createOscillator(), g=a.createGain();
+      o.type='triangle'; o.frequency.value=f;
+      g.gain.setValueAtTime(0.0001,bell); g.gain.exponentialRampToValueAtTime(0.26,bell+0.02); g.gain.exponentialRampToValueAtTime(0.0001,bell+0.95);
+      o.connect(g).connect(a.destination); o.start(bell); o.stop(bell+1.0);
+    });
+  }
+
+  /* ---------- timer ---------- */
+  startTimer(){
+    if(this.state.timerState==='running') return;
+    this.ensureAudio();
+    this._start=performance.now();
+    this._tickedSec=null;
+    this._lastUp=0;
+    this.setState({timerState:'running', timeLeft:10});
+    this._raf=requestAnimationFrame(this.tickLoop);
+  }
+  tickLoop=()=>{
+    const elapsed=(performance.now()-this._start)/1000;
+    let tl=Math.max(0, 10-elapsed);
+    const secLeft=Math.ceil(tl);
+    if(tl>0 && secLeft<=3 && secLeft!==this._tickedSec){ this._tickedSec=secLeft; this.tickSound(); }
+    if(tl<=0){ this.setState({timeLeft:0, timerState:'done'}); this.endSound(); return; }
+    const now=performance.now();
+    if(now-this._lastUp>90){ this._lastUp=now; this.setState({timeLeft:tl}); }
+    this._raf=requestAnimationFrame(this.tickLoop);
+  };
+
+  renderVals(){
+    const S=this.state, idx=S.index, screens=this.screens;
+    const cur=screens[idx]||{type:'title'};
+    const t=cur.type, Q=cur.q;
+    const accentFor=(qt)=> qt==='ox'?'#E0689B': qt==='mc'?'#2FA0A8':'#E8B53A';
+    const v={
+      scale:S.scale,
+      isTitle:t==='title', isRules:t==='rules', isQ:t==='q', isA:t==='a', isCapsule:t==='capsule', isFinal:t==='final',
+      screenCounter:(idx+1)+' / '+screens.length,
+      next:()=>this.go(1), prev:()=>this.go(-1), start:()=>this.startTimer(), toTitle:()=>this.goTo(0),
+    };
+    if(t==='q' && Q){
+      v.qNum=Q.n; v.qPoints=Q.points;
+      v.qTypeLabel = Q.type==='ox'?'OX 퀴즈': Q.type==='mc'?'객관식':'주관식';
+      v.accent=accentFor(Q.type);
+      v.isOX=Q.type==='ox'; v.isMC=Q.type==='mc'; v.isShort=Q.type==='short';
+      v.promptLines=Q.prompt.split('\n');
+      v.promptSize=(Q.type==='ox'?62:46)+'px';
+      v.hasRef=!!Q.ref; v.bibleRef=Q.ref||'';
+      v.options=(Q.options||[]).map((o,i)=>({letter:'①②③④'[i], text:o}));
+      v.qProgressLabel='문제 '+Q.n+' / 30';
+      v.qFillPct=(Q.n/30*100)+'%';
+      v.instruction = Q.type==='ox' ? '맞으면 O, 틀리면 X!  팀별 10초 상의 후 화이트보드에 적어 주세요!'
+        : Q.type==='mc' ? '팀별 10초 상의 후 화이트보드에 번호를 적어 주세요!'
+        : '팀별 10초 상의 후 화이트보드에 정답을 적어 주세요!';
+      const tl=S.timeLeft, circ=2*Math.PI*86;
+      v.ringCirc=circ;
+      v.ringOffset=circ*(1 - Math.max(0,Math.min(10,tl))/10);
+      v.ringColor = S.timerState==='done' ? '#E0533F' : tl>5 ? '#3FB37A' : tl>2 ? '#F0A93A' : '#E0533F';
+      v.timerDisplay = S.timerState==='done' ? '0' : String(Math.ceil(tl));
+      v.timerLabel = S.timerState==='idle' ? '눌러서 시작' : S.timerState==='running' ? '상의 중…' : '시간 종료!';
+    }
+    if(t==='a' && Q){
+      v.aQNum=Q.n;
+      v.aIsOX=Q.type==='ox';
+      v.aIsText=Q.type!=='ox';
+      if(Q.type==='ox'){
+        v.oxValue=Q.answer; v.oxColor=Q.answer==='O'?'#2E9E6B':'#D85547';
+        v.oxIsO=Q.answer==='O'; v.oxIsX=Q.answer!=='O';
+        v.hasExplain=!!Q.explain; v.explain=Q.explain||'';
+      } else {
+        v.answerText=Q.answer;
+        const L=(Q.answer||'').length;
+        v.answerFontSize=(L<10?108: L<22?78: L<40?58:46)+'px';
+      }
+    }
+    if(t==='capsule'){ v.capsuleAfter=cur.after; }
+    return v;
+  }
+}
+</script>
+</body>
+</html>
